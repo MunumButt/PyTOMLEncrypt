@@ -80,11 +80,12 @@ def encrypt_toml(
     input_file: str,
     output_file: str,
     key: Union[str, None] = None,
-    key_file: Optional[str] = None,
+    key_file: Union[str, None] = None,
+    key_env_var: Union[str, None] = None,
 ) -> None:
     """Encrypt a TOML file"""
     try:
-        encryption_key = get_key(key, key_file)
+        encryption_key = get_key(key=key, key_file=key_file, env_var_name=key_env_var)
 
         with open(input_file, "r") as file:
             toml_data = toml.load(file)
@@ -107,11 +108,12 @@ def decrypt_toml(
     input_file: str,
     output_file: str,
     key: Union[str, None] = None,
-    key_file: Optional[str] = None,
+    key_file: Union[str, None] = None,
+    key_env_var: Union[str, None] = None,
 ) -> None:
     """Decrypt a TOML file"""
     try:
-        decryption_key = get_key(key, key_file)
+        decryption_key = get_key(key=key, key_file=key_file, env_var_name=key_env_var)
 
         with open(input_file, "rb") as file:
             encrypted_data = file.read()
