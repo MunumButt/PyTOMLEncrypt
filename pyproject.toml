@@ -21,7 +21,8 @@ maintainers = [
   {name = "Munum Butt"},
 ]
 
-description = "Small utility to encrypt and decrypy TOML files"
+
+description = "Small utility to encrypt and decrypt TOML files"
 readme = "README.md"
 license = {file = "LICENSE.txt"}
 keywords = ["python", "TOML", "encryption", "decryption", "Encrypt", "Decrypt"]
@@ -35,3 +36,10 @@ Homepage = "https://github.com/MunumButt/PyTOMLEncrypt"
 Documentation = "https://github.com/MunumButt/PyTOMLEncrypt/blob/main/README.md"
 Repository = "https://github.com/MunumButt/PyTOMLEncrypt"
 "Bug Tracker" = "https://github.com/MunumButt/PyTOMLEncrypt/issues"
+
+
+[tool.pytest.ini_options]
+minversion = "8.0.0"
+testpaths = [
+    "tests/*py"
+]

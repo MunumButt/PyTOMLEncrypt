@@ -62,7 +62,7 @@ def test_get_key(key, key_file, monkeypatch):
     # Test with no key available
     monkeypatch.delenv("TOML_CRYPT_KEY", raising=False)
     with pytest.raises(TOMLCryptError):
-        get_key()
+        get_key(env_var_name="TOML_CRYPT_KEY")
 
 
 def test_encrypt_decrypt(key, temp_dir):

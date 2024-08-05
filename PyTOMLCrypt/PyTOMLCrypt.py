@@ -43,7 +43,7 @@ def load_key(filename: str) -> str:
         raise TOMLCryptError(f"Failed to load key: {str(e)}")
 
 
-def get_key_from_env(env_var_name: str) -> str:
+def get_key_from_env(env_var_name: str) -> Union[str, None]:
     """Get the encryption key from an environment variable"""
     key = os.environ.get(env_var_name)
     if key:
@@ -68,10 +68,12 @@ def get_key(
         return key
     elif key_file is not None:
         return load_key(key_file)
-    elif env_var_name is not None:
-        return get_key_from_env(env_var_name)
-    else:
-        raise TOMLCryptError("No encryption key provided")
+    elif key is None and key_file is None:
+        env_key = get_key_from_env(env_var_name)
+        if env_key is None:
+            raise TOMLCryptError("No encryption key provided")
+        else:
+            return env_key
 
 
 def encrypt_toml(
